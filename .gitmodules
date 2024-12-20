@@ -1,3 +1,9 @@
 [submodule "Immuno/PredIG"]
 	path = Immuno/PredIG
 	url = https://github.com/BSC-CNS-EAPM/PredIG.git
+[submodule "Immuno/NetCleave"]
+	path = Immuno/NetCleave
+	url = https://github.com/BSC-CNS-EAPM/NetCleave.git
+[submodule "Immuno/Neoantigens-NOAH"]
+	path = Immuno/Neoantigens-NOAH
+	url = https://github.com/BSC-CNS-EAPM/Neoantigens-NOAH.git
