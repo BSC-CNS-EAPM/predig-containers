@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
   repository_dispatch:
-    types: [predig_update]  # Listen for custom event
+    types: [ predig_update ] # Listen for custom event
   # Allow manual trigger
   workflow_dispatch:
 
@@ -24,6 +24,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: recursive # Add this to fetch submodules
+        lfs: true
 
     - name: Decompress IEDB data
       run: |
