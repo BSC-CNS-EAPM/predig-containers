@@ -1,0 +1,3 @@
+[submodule "Immuno/PredIG"]
+	path = Immuno/PredIG
+	url = https://github.com/BSC-CNS-EAPM/PredIG.git
