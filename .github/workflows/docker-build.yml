@@ -5,6 +5,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  repository_dispatch:
+    types: [predig_update]  # Listen for custom event
   # Allow manual trigger
   workflow_dispatch:
 
