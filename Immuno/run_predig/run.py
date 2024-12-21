@@ -118,11 +118,11 @@ def runPredIG(
 
     modelXG_name = (modelXG or "neoant").lower()
     if modelXG_name == "noncan":
-        modelXG = "/Immuno/predig/models/predig_noncan.model"
+        modelXG = "/Immuno/PredIG/models/predig_noncan.model"
     elif modelXG_name == "path":
-        modelXG = "/Immuno/predig/models/predig_path.model"
+        modelXG = "/Immuno/PredIG/models/predig_path.model"
     else:  # "PredIG-NeoA"
-        modelXG = "/Immuno/predig/models/predig_neoant.model"
+        modelXG = "/Immuno/PredIG/models/predig_neoant.model"
 
     mat = "/Immuno/netctlpan/tap.logodds.mat"
 

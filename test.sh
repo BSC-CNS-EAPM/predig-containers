@@ -26,19 +26,19 @@ cp -r tests tests_run
 # Test the UNIPROT mode
 echo "Testing the UNIPROT mode"
 docker run -v ./tests_run/:/predig -v ./uniprot:/uniprot \
-    predig-base predig_input1_uniprot_example.csv --output uniprot_output.csv
+    bsceapm/predig predig_input1_uniprot_example.csv --output uniprot_output.csv
 compare_files "tests_outcome/uniprot_output.csv" "tests_run/uniprot_output.csv" "UNIPROT"
 
 # Test the recombinant mode
 echo "Testing the recombinant mode"
 docker run -v ./tests_run/:/predig -v ./uniprot:/uniprot \
-    predig-base predig_input2_recombinant_example.csv --output recombinant_output.csv --type recombinant
+    bsceapm/predig predig_input2_recombinant_example.csv --output recombinant_output.csv --type recombinant
 compare_files "tests_outcome/recombinant_output.csv" "tests_run/recombinant_output.csv" "Recombinant"
 
 # Test the FASTA mode
 echo "Testing the FASTA mode"
 docker run -v ./tests_run/:/predig -v ./uniprot:/uniprot \
-    predig-base predig_input3_b2m_fasta_example.fasta --output fasta_output.csv --type fasta --alleles predig_input3_alleles_example.csv
+    bsceapm/predig predig_input3_b2m_fasta_example.fasta --output fasta_output.csv --type fasta --alleles predig_input3_alleles_example.csv
 compare_files "tests_outcome/fasta_output.csv" "tests_run/fasta_output.csv" "FASTA"
 
 # Clean up
