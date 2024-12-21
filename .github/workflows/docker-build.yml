@@ -76,7 +76,7 @@ jobs:
     - name: Decompress IEDB data
       run: |
         mkdir -p Immuno/Neoantigens-NOAH/noah/data
-        unzip -o IEDB_data.csv.zip -d Immuno/Neoantigens-NOAH/noah/data/ -y
+        unzip -o IEDB_data.csv.zip -d Immuno/Neoantigens-NOAH/noah/data/
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
