@@ -81,6 +81,9 @@ jobs:
 
     - name: Run tests
       run: |
+        wget https://ftp.ebi.ac.uk/pub/databases/uniprot/knowledgebase/uniprot_sprot.fasta.gz -O uniprot_sprot.fasta.gz
+        mkdir -p uniprot
+        gunzip -c uniprot_sprot.fasta.gz > uniprot/uniprot_sprot.fasta
         chmod +x ./test.sh
         ./test.sh
 
