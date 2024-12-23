@@ -16,7 +16,7 @@ docker pull bsceapm/predig:latest
 
 ## UniProt Database Setup
 
-1. Download the UniProt database file (uniprot_sprot.fasta) [Download here](https://ftp.ebi.ac.uk/pub/databases/uniprot/knowledgebase/uniprot_sprot.fasta.gz -O uniprot_sprot.fasta.gz)
+1. [Download](https://ftp.ebi.ac.uk/pub/databases/uniprot/knowledgebase/uniprot_sprot.fasta.gz) the UniProt database file (uniprot_sprot.fasta)
 2. Place it in a directory that will be mounted to the container
 3. This directory must be bound to `/uniprot` when running the container
 
