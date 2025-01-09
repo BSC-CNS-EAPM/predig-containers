@@ -219,7 +219,6 @@ def runPredigNetCleave(
 
     df = df[["epitope", "prediction"]]
     df = df.rename(columns={"prediction": "netcleave"})
-    df.to_csv(output, index=True)
 
     shutil.rmtree("output")
     return df
