@@ -56,7 +56,6 @@ jobs:
 
   build-test-push:
     runs-on: self-hosted
-    if: github.event_name != 'workflow_dispatch' || !inputs.build_base
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
