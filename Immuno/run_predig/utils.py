@@ -153,7 +153,7 @@ def runPredigNetCleave(
 
     # Run the NetCleave
     # python_path_env = "/home/lavane/micromamba/envs/horus/bin/python"
-    python_path_env = "/root/.local/share/mamba/envs/predig_env/bin/python"
+    python_path_env = "/opt/conda/envs/predig_env/bin/python"
 
     # --pred_input
     # 1: fasta

@@ -1,4 +1,4 @@
-#!/root/.local/share/mamba/envs/predig_env/bin/python
+#!/opt/conda/envs/predig_env/bin/python
 
 import os
 import argparse
@@ -130,7 +130,7 @@ def runPredIG(
     pchPath = "/Immuno/PCH/predig_pch_calc.R"
 
     # Get the MHCflurry path
-    mhcflurryPath = "/root/.local/share/mamba/envs/predig_env/bin/mhcflurry-predict"
+    mhcflurryPath = "/opt/conda/envs/predig_env/bin/mhcflurry-predict"
 
     # Get the NetCleave path
     netCleavePath = "/Immuno/NetCleave/NetCleave.py"
@@ -215,7 +215,7 @@ def runPredIG(
 
     print("Running NOAH")
 
-    python_exect = "/root/.local/share/mamba/envs/predig_env/bin/python"
+    python_exect = "/opt/conda/envs/predig_env/bin/python"
     # Run the NOAH, ["HLA", "epitope", "NOAH_score"] id="HLA", "epitope"
     output_noah = u.runPredigNOAH(
         df_csv=df, predigNOAH_path=noahPath, model=model, python_exec=python_exect

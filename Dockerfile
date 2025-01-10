@@ -1,5 +1,4 @@
 FROM bsceapm/predig-base:latest
-
 ################## METADATA ######################
 LABEL maintainer="Christian Domínguez-Dalmases <christian.dominguez@bsc.es>, Albert Cañellas-Sole <albert.canellas@bsc.es>, Roc Farriol-Duran <roc.farriol@bsc.es>" \
     container="PredIG-Final Image" \
@@ -13,8 +12,8 @@ COPY predig_env.yml /tmp/predig_env.yml
 # Install the environment
 RUN micromamba create -n predig_env -f /tmp/predig_env.yml -y
 
-# Set up environment activation
-RUN echo "source ~/.local/share/mamba/envs/predig_env/bin/activate" >> ~/.bashrc
+# Set up environment activation in system-wide profile
+RUN echo "source /opt/conda/envs/predig_env/bin/activate" >> /etc/bash.bashrc
 
 # Download mhcflurry models
 RUN micromamba run -n predig_env mhcflurry-downloads fetch models_class1_presentation
