@@ -1,8 +1,12 @@
-# PredIG Docker and Singularity Documentation
+# PredIG Container Documentation
 
 ## Overview
 
-PredIG is a tool for protein immunogenicity prediction that can predict from various input formats including UniProt IDs and FASTA sequences.
+PredIG (https://github.com/BSC-CNS-EAPM/PredIG) is a predictor of T-cell epitope immunogenicity that supports pan-HLA-I predictions and various input formats for epitope assessment: Peptides+UniProtID(CSV), Peptides+ProteinSeq(CSV) and Full Protein Sequence (FASTA).
+
+## Abstract
+
+Cytotoxic T cells are key effectors in the immune response against pathogens and cancer. Hence, their activation, driven by the recognition of immunogenic epitopes, is a fundamental goal for immunotherapies such as checkpoint inhibitors, TILs or vaccines. The epitope landscape in cancer and infection, however, is too large to test due to the immense number of candidates versus the high cost and low throughput of experimental techniques. Immunoinformatic models can prioritize the candidates with greater potential with orders of magnitude higher throughput than experimental approaches, but their success rate has remained incremental and their explainability limited. Here we present PredIG, a predictor of T-cell epitope immunogenicity that integrates antigenic and physicochemical properties of 17448 peptide-HLA complexes using XGBoost, a decision-tree-based algorithm. PredIG outperforms state-of-the-art methods in two pathogen and non-canonical cancer antigen held-out sets. In cancer neoantigens, PredIG increases the success rate of binding affinity predictions and identifies alternative immunogenic epitopes. Furthermore, since PredIG uses an explainable architecture, its interpretability scheme pinpoints the importance of antigenic and physicochemical epitope properties and their differences in each antigen type. Overall, PredIG increases the immunogenicity success rates in vaccine design for cancer and infection and displays an unprecedented interpretability to build community trust. In addition, PredIG is accessible through containerized environments and a user-friendly webserver at https://horus.bsc.es/predig
 
 ## Prerequisites
 
@@ -14,18 +18,26 @@ PredIG is a tool for protein immunogenicity prediction that can predict from var
 docker pull bsceapm/predig:latest
 ```
 
+For macOS running on Apple Silicon the image has to be requested using the `linux/amd64` platform tag:
+```bash
+docker pull bsceapm/predig:latest --platform linux/amd64
+```
+
 ## UniProt Database Setup
 
-1. Download the UniProt database file (uniprot_sprot.fasta) [Download here](https://ftp.ebi.ac.uk/pub/databases/uniprot/knowledgebase/uniprot_sprot.fasta.gz -O uniprot_sprot.fasta.gz)
+1. [Download](https://ftp.ebi.ac.uk/pub/databases/uniprot/knowledgebase/uniprot_sprot.fasta.gz) the UniProt database file (uniprot_sprot.fasta)
 2. Place it in a directory that will be mounted to the container
 3. This directory must be bound to `/uniprot` when running the container
 
 ## Basic Usage with Docker
 
-The container requires two volume bindings:
+The container requires two volume bindings to make your files available to the program inside the docker environment.
+This can be accomplished with the `-v` flag:
 
-- Your working directory to `/predig` (for input/output files)
-- UniProt database directory to `/uniprot`
+- Your working directory to `/predig` (for input/output files): `-v /path/to/work/dir:/predig`
+- UniProt database directory to `/uniprot`: `-v /path/to/uniprot/dir:/uniprot`
+
+> **_NOTE:_** The binding to the working directory might change with every experiment. Binding to uniprot has to remain the same unless a new version of the uniprot.fasta file has been provided.
 
 Basic command structure:
 
@@ -33,36 +45,49 @@ Basic command structure:
 docker run -v /path/to/work/dir:/predig -v /path/to/uniprot/dir:/uniprot bsceapm/predig <input_file> --output <output_file> [options]
 ```
 
+## PREDIG Models
+
+PredIG provides three different models optimized for target epitope types.
+neoant > opt for cancer neoantigens.
+noncan > opt for non-canonical cancer antigens.
+path > opt for epitopes derived from infectious pathogens.
+
+Specify setting the flag --model:
+
+```bash
+docker run -v /path/to/work/dir:/predig -v /path/to/uniprot/dir:/uniprot bsceapm/predig <input_file> --output <output_file> --model neoant [options]
+```
+
 ## Input Modes
 
 ### 1. UniProt Mode (Default)
 
-Predict using UniProt.
+Predict using a list of epitopes (peptide sequences), HLA-I alleles in 4 digits resolution (ie HLA-A\*01:01) and associated UniProt ID for their parental protein. The CSV file must contain the following columns: epitope, HLA_allele, uniprot_id
+
 Example:
 
 ```bash
-docker run -v ./my_data:/predig -v ./uniprot:/uniprot \
- bsceapm/predig input_proteins.csv --output results.csv
+docker run -v ./my_data:/predig -v ./uniprot:/uniprot bsceapm/predig input_uniprot.csv --output results.csv
 ```
 
 ### 2. Recombinant Mode
 
-Precit using recombinant sequences.
+Predict using a list of epitopes (peptide sequences), HLA-I alleles in 4 digits resolution (ie HLA-A\*01:01) and the amino acid sequence for their parental protein. Useful in case the target protein is mutant, recombinant or not indexed at UniProt. The CSV file must contain the columns: epitope, HLA_allele, protein_seq, protein_name
+
 Example:
 
 ```bash
-docker run -v ./my_data:/predig -v ./uniprot:/uniprot \
- bsceapm/predig input_sequences.csv --output results.csv --type recombinant
+docker run -v ./my_data:/predig -v ./uniprot:/uniprot bsceapm/predig input_sequences.csv --output results.csv --type recombinant
 ```
 
 ### 3. FASTA Mode
 
-Predict from FASTA input files. Requires an additional HLA alleles file.
+Predict all the epitopes of a target protein using FASTA input file. Specify the target HLA-I alleles using an additional CSV file listing alleles in 4-digits resolution. Epitopes of X to X sequence length will be generated. Set using the flag --precursor-length and XXX.
+
 Example:
 
 ```bash
-docker run -v ./my_data:/predig -v ./uniprot:/uniprot \
- bsceapm/predig sequences.fasta --output results.csv --type fasta --alleles alleles.csv
+docker run -v ./my_data:/predig -v ./uniprot:/uniprot bsceapm/predig sequences.fasta --output results.csv --type fasta --alleles alleles.csv
 ```
 
 ## Command Arguments
@@ -77,7 +102,7 @@ Optional:
 - `--type`: Input file type (uniprot, fasta, or recombinant)
 - `--model`: Prediction model (noncan, neoant, or path)
 - `--alleles`: Path to HLA alleles file (required for FASTA mode)
-- `--alpha`: Alpha parameter value
+- `--alpha`: Alpha parameter value for TapMap
 - `--precursor-length`: Length of precursor sequence
 
 ## Running with Singularity
@@ -97,8 +122,7 @@ singularity pull predig.sif docker://bsceapm/predig:latest
 The command structure is similar to Docker, but uses Singularity bind syntax:
 
 ```bash
-singularity run --bind /path/to/work/dir:/predig,/path/to/uniprot/dir:/uniprot \
-    predig.sif <input_file> --output <output_file> [options]
+singularity run --bind /path/to/work/dir:/predig,/path/to/uniprot/dir:/uniprot /path/to/predig.sif <input_file> --output <output_file> [options]
 ```
 
 ### Singularity Examples
@@ -106,22 +130,19 @@ singularity run --bind /path/to/work/dir:/predig,/path/to/uniprot/dir:/uniprot \
 1. UniProt Mode:
 
 ```bash
-singularity run --bind ./my_data:/predig,./uniprot:/uniprot \
-    predig.sif input_proteins.csv --output results.csv
+singularity run --bind ./:/predig,./my_uniprot_folder:/uniprot /path/to/predig.sif input_uniprot.csv --output results.csv
 ```
 
 2. Recombinant Mode:
 
 ```bash
-singularity run --bind ./my_data:/predig,./uniprot:/uniprot \
-    predig.sif input_sequences.csv --output results.csv --type recombinant
+singularity run --bind ./:/predig,./my_uniprot_folder:/uniprot /path/to/predig.sif input_sequences.csv --output results.csv --type recombinant
 ```
 
 3. FASTA Mode:
 
 ```bash
-singularity run --bind ./my_data:/predig,./uniprot:/uniprot \
-    predig.sif sequences.fasta --output results.csv --type fasta --alleles alleles.csv
+singularity run --bind ./:/predig,./my_uniprot_folder:/uniprot /path/to/predig.sif sequences.fasta --output results.csv --type fasta --alleles alleles.csv
 ```
 
 ### Singularity Notes
