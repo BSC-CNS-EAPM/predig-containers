@@ -1,0 +1,3 @@
++ echo 'Subsequent stderr output redirected to stdout'
+Subsequent stderr output redirected to stdout
++ exec

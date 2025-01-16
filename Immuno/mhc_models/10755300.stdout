@@ -1,0 +1,247 @@
+Sender: LSF System <lsfadmin@lc01a11>
+Subject: Job 10755300: <MHCf> in cluster <chimera> Exited
+
+Job <MHCf> was submitted from host <li03c04> by user <odonnt02> in cluster <chimera> at Wed Jun 10 15:22:54 2020
+Job was executed on host(s) <lc01a11>, in queue <premium>, as user <odonnt02> in cluster <chimera> at Wed Jun 10 15:22:54 2020
+</hpc/users/odonnt02> was used as the home directory.
+</hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation> was used as the working directory.
+Started at Wed Jun 10 15:22:54 2020
+Terminated at Wed Jun 10 15:23:02 2020
+Results reported at Wed Jun 10 15:23:02 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -J MHCf # Job name
+#BSUB -P acc_nkcancer # allocation account or Unix group
+#BSUB -q premium # queue
+#BSUB -R span[hosts=1] # one node
+#BSUB -n 1 # number of compute cores
+#BSUB -W 40:00 # walltime in HH:MM
+#BSUB -R rusage[mem=45000] # mb memory requested
+#BSUB -o %J.stdout # output log (%J : JobID)
+#BSUB -eo %J.stderr # error log
+#BSUB -L /bin/bash # Initialize the execution environment
+#
+
+set -e
+set -x
+
+echo "Subsequent stderr output redirected to stdout" >&2
+exec 2>&1
+
+export TMPDIR=/local/JOBS/mhcflurry
+export PATH=$HOME/.conda/envs/py36b/bin/:$PATH
+export PYTHONUNBUFFERED=1
+export KMP_SETTINGS=1
+
+free -m
+module list
+env
+
+cd /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+time mhcflurry-class1-train-presentation-models --data /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/train_data.csv.bz2 --affinity-predictor "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined" --processing-predictor-with-flanks "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.with_flanks" --processing-predictor-without-flanks "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.no_flank" --out-models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models
+time mhcflurry-calibrate-percentile-ranks --models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models --match-amino-acid-distribution-data "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined/train_data.csv.bz2" --alleles-file "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined/train_data.csv.bz2" --predictor-kind class1_presentation --num-peptides-per-length 100000 --alleles-per-genotype 1 --num-genotypes 50 --verbosity 1
+
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   5.69 sec.
+    Max Memory :                                 232 MB
+    Average Memory :                             137.00 MB
+    Total Requested Memory :                     45000.00 MB
+    Delta Memory :                               44768.00 MB
+    Max Swap :                                   -
+    Max Processes :                              5
+    Max Threads :                                6
+    Run time :                                   8 sec.
+    Turnaround time :                            8 sec.
+
+The output (if any) follows:
+
++ export TMPDIR=/local/JOBS/mhcflurry
++ TMPDIR=/local/JOBS/mhcflurry
++ export PATH=/hpc/users/odonnt02/.conda/envs/py36b/bin/:/hpc/packages/minerva-common/anaconda2/4.3.0/bin:/hpc/packages/minerva-common/anaconda2/4.3.0/condabin:/hpc/users/odonnt02/miniconda2/bin:/hpc/packages/minerva-common/vim/8.0/bin:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/etc:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/bin:/bin:/usr/bin:/usr/mbin:/local/bin:/usr/local:/usr/ucb:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin:/opt/ibutils/bin:/hpc/users/odonnt02/scripts:/hpc/users/odonnt02/bin
++ PATH=/hpc/users/odonnt02/.conda/envs/py36b/bin/:/hpc/packages/minerva-common/anaconda2/4.3.0/bin:/hpc/packages/minerva-common/anaconda2/4.3.0/condabin:/hpc/users/odonnt02/miniconda2/bin:/hpc/packages/minerva-common/vim/8.0/bin:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/etc:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/bin:/bin:/usr/bin:/usr/mbin:/local/bin:/usr/local:/usr/ucb:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin:/opt/ibutils/bin:/hpc/users/odonnt02/scripts:/hpc/users/odonnt02/bin
++ export PYTHONUNBUFFERED=1
++ PYTHONUNBUFFERED=1
++ export KMP_SETTINGS=1
++ KMP_SETTINGS=1
++ free -m
+              total        used        free      shared  buff/cache   available
+Mem:         192924       27238      134243       13965       31442      150492
+Swap:             0           0           0
++ module list
+++ /usr/share/lmod/lmod/libexec/lmod bash list
+
+Currently Loaded Modules:
+  1) vim/8.0
+
+ 
+
++ eval 'MODULEPATH=/etc/modulefiles:/usr/share/modulefiles:/usr/share/lmod/lmod/modulefiles/Core:/opt/hpc/packages/minerva-centos7/modulefiles:/opt/hpc/packages/minerva-common/modulefiles;' export 'MODULEPATH;' '_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXt9LG1UPXt2aW09e1siZm4iXT0iL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMvdmltLzguMCIsWyJmdWxsTmFtZSJdPSJ2aW0vOC4wIixbImxvYWRPcmRlciJdPTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0idmltIix9LH0sbXBhdGhBPXsiL2V0Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL2xtb2QvbG1vZC9tb2R1bGVmaWxlcy9Db3JlIiwiL29wdC9ocGMvcGFja2Fn;' export '_ModuleTable001_;' '_ModuleTable002_=ZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzIiwiL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvbG1vZC9sbW9kL21vZHVsZWZpbGVzL0NvcmU6L29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzOi9vcHQvaHBjL3BhY2thZ2VzL21pbmVydmEtY29tbW9uL21vZHVsZWZpbGVzIix9;' export '_ModuleTable002_;' '_ModuleTable_Sz_=2;' export '_ModuleTable_Sz_;'
+++ MODULEPATH=/etc/modulefiles:/usr/share/modulefiles:/usr/share/lmod/lmod/modulefiles/Core:/opt/hpc/packages/minerva-centos7/modulefiles:/opt/hpc/packages/minerva-common/modulefiles
+++ export MODULEPATH
+++ _ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXt9LG1UPXt2aW09e1siZm4iXT0iL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMvdmltLzguMCIsWyJmdWxsTmFtZSJdPSJ2aW0vOC4wIixbImxvYWRPcmRlciJdPTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0idmltIix9LH0sbXBhdGhBPXsiL2V0Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL2xtb2QvbG1vZC9tb2R1bGVmaWxlcy9Db3JlIiwiL29wdC9ocGMvcGFja2Fn
+++ export _ModuleTable001_
+++ _ModuleTable002_=ZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzIiwiL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvbG1vZC9sbW9kL21vZHVsZWZpbGVzL0NvcmU6L29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzOi9vcHQvaHBjL3BhY2thZ2VzL21pbmVydmEtY29tbW9uL21vZHVsZWZpbGVzIix9
+++ export _ModuleTable002_
+++ _ModuleTable_Sz_=2
+++ export _ModuleTable_Sz_
+++ : -s sh
++ eval
++ env
+MANPATH=/hpc/packages/minerva-common/vim/8.0/share/man:/usr/share/lmod/lmod/share/man:/hpc/lsf/10.1/man::
+LESS_TERMCAP_mb=[01;31m
+LSB_EXEC_CLUSTER=chimera
+HOSTNAME=lc01a11
+LESS_TERMCAP_md=[01;31m
+LSB_EFFECTIVE_RSRCREQ=select[((healthy=1)) && (type == local)] order[!-slots:-maxslots] rusage[mem=45000.00] span[hosts=1] same[model] affinity[core(1)*1] 
+LESS_TERMCAP_me=[0m
+LSF_LOGDIR=/hpc/lsf/log
+LSF_LIM_API_NTRIES=1
+__LMOD_REF_COUNT_MODULEPATH=/etc/modulefiles:1;/usr/share/modulefiles:1;/usr/share/lmod/lmod/modulefiles/Core:1;/opt/hpc/packages/minerva-centos7/modulefiles:1;/opt/hpc/packages/minerva-common/modulefiles:1
+SHELL=/bin/bash
+LSB_BATCH_JID=10755300
+HISTSIZE=1000
+TMPDIR=/local/JOBS/mhcflurry
+MODULEPATH_ROOT=/usr/share/modulefiles
+RM_CPUTASK1=4
+CONDA_SHLVL=1
+LS_EXECCWD=/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+LSB_TRAPSIGS=trap # 15 10 12 2 1
+PYTHONUNBUFFERED=1
+CONDA_PROMPT_MODIFIER=(base) 
+LS_JOBPID=80127
+LSB_ERRORFILE=10755300.stderr
+LMOD_PKG=/usr/share/lmod/lmod
+LSB_MAX_NUM_PROCESSORS=1
+LSB_JOBRES_CALLBACK=45487@lc01a11
+LSF_SERVERDIR=/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/etc
+LSB_JOB_EXECUSER=odonnt02
+LSB_JOBID=10755300
+LESS_TERMCAP_ue=[0m
+LMOD_VERSION=7.8.17
+LSB_JOBRES_PID=80127
+LSB_JOBNAME=MHCf
+__LMOD_REF_COUNT_LOADEDMODULES=vim/8.0:1
+BSUB_BLOCK_EXEC_HOST=Y
+LSF_LIBDIR=/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/lib
+USER=odonnt02
+LMOD_sys=Linux
+LD_LIBRARY_PATH=/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/lib
+SBD_KRB5CCNAME_VAL=
+CONDA_EXE=/hpc/packages/minerva-common/anaconda2/4.3.0/bin/conda
+LSB_EEXEC_REAL_UID=
+HOSTTYPE=X86_64
+__LMOD_REF_COUNT__LMFILES_=/opt/hpc/packages/minerva-common/modulefiles/vim/8.0:1
+LSB_CG_MEMLIMIT=0xafc800000
+LS_EXEC_T=START
+PAGER=less
+LSB_SUB_RES_REQ= rusage[mem=45000] span[hosts=1]
+LS_SUBCWD=/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+LESS_TERMCAP_us=[01;32m
+LSB_HOSTS=lc01a11
+LSB_JOBFILENAME=/local/JOBS/1591816974.10755300
+_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXt9LG1UPXt2aW09e1siZm4iXT0iL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMvdmltLzguMCIsWyJmdWxsTmFtZSJdPSJ2aW0vOC4wIixbImxvYWRPcmRlciJdPTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0idmltIix9LH0sbXBhdGhBPXsiL2V0Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL2xtb2QvbG1vZC9tb2R1bGVmaWxlcy9Db3JlIiwiL29wdC9ocGMvcGFja2Fn
+MAIL=/var/spool/mail/odonnt02
+PATH=/hpc/users/odonnt02/.conda/envs/py36b/bin/:/hpc/packages/minerva-common/anaconda2/4.3.0/bin:/hpc/packages/minerva-common/anaconda2/4.3.0/condabin:/hpc/users/odonnt02/miniconda2/bin:/hpc/packages/minerva-common/vim/8.0/bin:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/etc:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/bin:/bin:/usr/bin:/usr/mbin:/local/bin:/usr/local:/usr/ucb:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin:/opt/ibutils/bin:/hpc/users/odonnt02/scripts:/hpc/users/odonnt02/bin
+LSB_JOBINDEX=0
+CUDA_VISIBLE_DEVICES_ORIG=
+LSB_EXIT_PRE_ABORT=99
+CONDA_PREFIX=/hpc/packages/minerva-common/anaconda2/4.3.0
+LSB_JOBEXIT_STAT=0
+PWD=/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+_LMFILES_=/opt/hpc/packages/minerva-common/modulefiles/vim/8.0
+CUDA_VISIBLE_DEVICES=
+LSB_RES_GET_FANOUT_INFO=Y
+MODULEPATH=/etc/modulefiles:/usr/share/modulefiles:/usr/share/lmod/lmod/modulefiles/Core:/opt/hpc/packages/minerva-centos7/modulefiles:/opt/hpc/packages/minerva-common/modulefiles
+LSB_CHKFILENAME=/local/JOBS/1591816974.10755300
+_ModuleTable_Sz_=2
+LOADEDMODULES=vim/8.0
+LSB_DJOB_HOSTFILE=/local/JOBS/1591816974.10755300.hostfile
+LSF_JOB_TIMESTAMP_VALUE=1591816974
+LMOD_CMD=/usr/share/lmod/lmod/libexec/lmod
+LSB_AFFINITY_HOSTFILE=/local/JOBS/1591816974.10755300.hostAffinityFile
+LSB_DJOB_NUMPROC=1
+LSF_BINDIR=/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/bin
+LSB_EXEC_HOSTTYPE=X86_64
+HISTCONTROL=ignoredups
+LESSCHARSET=latin1
+SHLVL=2
+HOME=/hpc/users/odonnt02
+__LMOD_REF_COUNT_PATH=/hpc/packages/minerva-common/vim/8.0/bin:1;/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/etc:1;/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/bin:1;/bin:1;/usr/bin:1;/usr/mbin:1;/local/bin:1;/usr/local:1;/usr/ucb:1;/usr/local/sbin:1;/usr/sbin:1;/usr/lpp/mmfs/bin:1;/opt/ibutils/bin:1;/hpc/users/odonnt02/scripts:1
+LSB_APPLICATION_NAME=default
+JOB_TERMINATE_INTERVAL=10
+_ModuleTable002_=ZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzIiwiL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvbG1vZC9sbW9kL21vZHVsZWZpbGVzL0NvcmU6L29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzOi9vcHQvaHBjL3BhY2thZ2VzL21pbmVydmEtY29tbW9uL21vZHVsZWZpbGVzIix9
+BINARY_TYPE_HPC=
+LSB_ACCT_FILE=/local/tmp/10755300.tmpdir/.1591816974.10755300.acct
+LSB_SUB_HOST=li03c04
+BASH_ENV=/usr/share/lmod/lmod/init/bash
+__LSF_JOB_TMPDIR__=/local/tmp/10755300.tmpdir
+LSB_SUB_USER=odonnt02
+LSFUSER=odonnt02
+CONDA_PYTHON_EXE=/hpc/packages/minerva-common/anaconda2/4.3.0/bin/python
+LESS=-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f \
+:stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...
+LSB_OUTDIR=/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+LSB_QUEUE=premium
+LSB_MCPU_HOSTS=lc01a11 1 
+LSB_OUTPUTFILE=10755300.stdout
+LOGNAME=odonnt02
+LESS_TERMCAP_so=[01;44;33m
+MODULESHOME=/usr/share/lmod/lmod
+CONDA_DEFAULT_ENV=base
+LMOD_SETTARG_FULL_SUPPORT=no
+LESSOPEN=|/usr/bin/lesspipe.sh %s 2>&-
+LSF_CGROUP_TOPDIR_KEY=chimera
+OMP_NUM_THREADS=1
+LSB_XFER_OP=
+LSB_EEXEC_REAL_GID=
+LSB_BIND_CPU_LIST=4
+KMP_SETTINGS=1
+__LMOD_REF_COUNT_MANPATH=/hpc/packages/minerva-common/vim/8.0/share/man:1;/usr/share/lmod/lmod/share/man:1;/hpc/lsf/10.1/man:1
+LMOD_DIR=/usr/share/lmod/lmod/libexec
+LSF_ENVDIR=/hpc/lsf/conf
+LSB_DJOB_RANKFILE=/local/JOBS/1591816974.10755300.hostfile
+LESS_TERMCAP_se=[0m
+BASH_FUNC_module()=() {  eval $($LMOD_CMD bash "$@") && eval $(${LMOD_SETTARG_CMD:-:} -s sh)
+}
+BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd "$@")
+}
+_=/bin/env
++ cd /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
++ mhcflurry-class1-train-presentation-models --data /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/train_data.csv.bz2 --affinity-predictor /hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined --processing-predictor-with-flanks /hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.with_flanks --processing-predictor-without-flanks /hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.no_flank --out-models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models
+To show stack trace, run:
+kill -s USR1 80478
+Arguments:
+Namespace(affinity_predictor='/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined', data='/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/train_data.csv.bz2', debug=False, hla_column='hla', out_models_dir='/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models', processing_predictor_with_flanks='/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.with_flanks', processing_predictor_without_flanks='/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.no_flank', target_column='hit', verbosity=1)
+Loaded training data: (75378, 7)
+Subselected to 8-15mers: (75378, 7)
+Attempting to create directory: /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models
+Done.
+Loaded affinity predictor <Class1AffinityPredictor at 0x2ac458a34a58 [mhcflurry 1.7.0] [pan] generated on Wed Jun 10 06:40:35 2020>
+Loaded processing_predictor_with_flanks <Class1ProcessingPredictor at 0x2ac455208e48 [mhcflurry 1.7.0] generated on Wed Jun 10 14:45:15 2020>
+Loaded processing_predictor_without_flanks <Class1ProcessingPredictor at 0x2ac4551fbb38 [mhcflurry 1.7.0] generated on Wed Jun 10 14:54:49 2020>
+Before fit: saving affinity and processing predictors.
+Traceback (most recent call last):
+  File "/hpc/users/odonnt02/.conda/envs/py36b/bin/mhcflurry-class1-train-presentation-models", line 11, in <module>
+    load_entry_point('mhcflurry', 'console_scripts', 'mhcflurry-class1-train-presentation-models')()
+  File "/hpc/users/odonnt02/sinai/git/mhcflurry/mhcflurry/train_presentation_models_command.py", line 82, in run
+    return main(args)
+  File "/hpc/users/odonnt02/sinai/git/mhcflurry/mhcflurry/train_presentation_models_command.py", line 140, in main
+    write_metdata = False)
+  File "/hpc/users/odonnt02/sinai/git/mhcflurry/mhcflurry/class1_presentation_predictor.py", line 818, in save
+    raise RuntimeError("Can't save before fitting")
+RuntimeError: Can't save before fitting
+
+
+PS:
+
+Read file <10755300.stderr> for stderr output of this job.
+

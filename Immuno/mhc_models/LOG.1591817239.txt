@@ -1,0 +1,198 @@
+Invocation: GENERATE.sh cluster continue-incomplete
+Wed Jun 10 15:27:19 EDT 2020
++ echo 'Invocation: GENERATE.sh cluster' continue-incomplete
++ date
++ pip freeze
+absl-py==0.7.1
+appdirs==1.4.3
+astor==0.7.1
+backcall==0.1.0
+biopython==1.74
+certifi==2019.9.11
+chardet==3.0.4
+datacache==1.1.5
+decorator==4.4.0
+dill==0.3.1.1
+future==0.17.1
+gast==0.2.2
+google-pasta==0.1.7
+grpcio==1.16.1
+gtfparse==1.2.0
+h5py==2.9.0
+idna==2.8
+ipdb==0.12.3
+ipython==7.8.0
+ipython-genutils==0.2.0
+jedi==0.15.1
+joblib==0.13.2
+Keras==2.3.1
+Keras-Applications==1.0.8
+Keras-Preprocessing==1.1.0
+Markdown==3.1.1
+memoized-property==1.0.3
+-e git+git@github:openvax/mhcflurry.git@f83210584fdf2aba41f37b3106eb418df4431728#egg=mhcflurry
+mhcnames==0.4.8
+-e git+git@github.com:openvax/mhctools.git@37395797da5a127621e3d001e846ef07221624ec#egg=mhctools
+mock==3.0.5
+np-utils==0.5.10.0
+numpy==1.16.4
+opt-einsum==3.1.0
+pandas==0.24.2
+parso==0.5.1
+pexpect==4.7.0
+pickleshare==0.7.5
+progressbar33==2.4
+prompt-toolkit==2.0.9
+protobuf==3.8.0
+ptyprocess==0.6.0
+pyensembl==1.8.0
+Pygments==2.4.2
+python-dateutil==2.8.0
+pytz==2019.1
+PyVCF==0.6.8
+PyYAML==5.1.1
+requests==2.22.0
+scikit-learn==0.21.3
+scipy==1.3.0
+sercol==0.1.4
+serializable==0.1.1
+simplejson==3.16.0
+six==1.12.0
+tensorboard==1.15.0
+tensorflow==1.15.0
+tensorflow-estimator==1.15.1
+tensorflow-gpu==1.15.0
+termcolor==1.1.0
+tinytimer==0.0.0
+tqdm==4.32.2
+traitlets==4.3.2
+typechecks==0.1.0
+urllib3==1.25.6
+varcode==0.9.4
+wcwidth==0.1.7
+Werkzeug==0.15.4
+wrapt==1.11.2
+xlrd==1.2.0
++ git status
+# On branch 1.7.0c
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	../LAUNCH
+#	../data_evaluation/cluster_submit_script_header.mssm_hpc.premium.lsf
+#	../data_mass_spec_benchmark/
+#	../models_class1_pan_refined/
+nothing added to commit but untracked files present (use "git add" to track)
++ mhcflurry-downloads info
+Environment variables
+  MHCFLURRY_DATA_DIR                  [unset or empty]
+  MHCFLURRY_DOWNLOADS_CURRENT_RELEASE [unset or empty]
+  MHCFLURRY_DOWNLOADS_DIR             [unset or empty]
+  MHCFLURRY_DEFAULT_CLASS1_MODELS     [unset or empty]
+
+Configuration
+  current release                     = 1.7.0                
+  downloads dir                       = /hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0 [exists]
+
+DOWNLOAD NAME                             DOWNLOADED?   UP TO DATE?   URL                  
+models_class1_pan                         YES           YES           https://github.com/openvax/mhcflurry/releases/download/pre-1.7.0/models_class1_pan.selected.20200610.tar.bz2 
+models_class1_presentation                YES           YES           https://github.com/openvax/mhcflurry/releases/download/pre-1.7.0/models_class1_presentation.20200609.tar.bz2 
+models_class1_processing                  YES           YES           https://github.com/openvax/mhcflurry/releases/download/pre-1.7.0/models_class1_processing.selected.20200610.tar.bz2 
+models_class1_pan_unselected              YES           YES           https://github.com/openvax/mhcflurry/releases/download/pre-1.7.0/models_class1_pan.20200610.tar.bz2 
+models_class1_pan_variants                YES           NO            https://github.com/openvax/mhcflurry/releases/download/pre-1.7.0/models_class1_pan_variants.selected.20200610.tar.bz2 
+models_class1_processing_variants         NO                          https://github.com/openvax/mhcflurry/releases/download/1.6.0/models_class1_processing_variants.selected.20200124.tar.bz2 
+data_evaluation                           NO                          https://github.com/openvax/mhcflurry/releases/download/pre-1.7.0/data_evaluation.20200610.tar.bz2 
+data_predictions                          YES           UNKNOWN       https://github.com/openvax/mhcflurry/releases/download/pre-1.7.0/data_predictions.20200430.tar.bz2.part.aa + 14 more parts 
+data_mass_spec_annotated                  YES           YES           https://github.com/openvax/mhcflurry/releases/download/1.6.0/data_mass_spec_annotated.20191226.tar.bz2 
+data_references                           YES           YES           https://github.com/openvax/mhcflurry/releases/download/pre-1.4.0/data_references.20190927.tar.bz2 
+data_iedb                                 NO                          https://github.com/openvax/mhcflurry/releases/download/pre-1.7.0/data_iedb.20200427.tar.bz2 
+data_systemhcatlas                        NO                          http://github.com/openvax/mhcflurry/releases/download/pan-dev1/data_systemhcatlas.20190506.tar.bz2 
+allele_sequences                          YES           YES           https://github.com/openvax/mhcflurry/releases/download/1.4.0/allele_sequences.20191231.tar.bz2 
+random_peptide_predictions                YES           YES           http://github.com/openvax/mhcflurry/releases/download/pan-dev1/random_peptide_predictions.20190506.tar.bz2 
+data_published                            YES           YES           https://github.com/openvax/mhcflurry/releases/download/pre-1.7.0/data_published.20200501.tar.bz2 
+data_curated                              YES           YES           https://github.com/openvax/mhcflurry/releases/download/pre-1.7.0/data_curated.20200427.tar.bz2 
+models_class1                             NO                          http://github.com/openvax/mhcflurry/releases/download/pre-1.2/models_class1.20180225.tar.bz2 
+models_class1_selected_no_mass_spec       NO                          http://github.com/openvax/mhcflurry/releases/download/pre-1.2/models_class1_selected_no_mass_spec.20180225.tar.bz2 
+models_class1_unselected                  NO                          http://github.com/openvax/mhcflurry/releases/download/pre-1.2/models_class1_unselected.20180221.tar.bz2 
+models_class1_trained_with_mass_spec      NO                          http://github.com/openvax/mhcflurry/releases/download/pre-1.2.1/models_class1_trained_with_mass_spec.20180228.tar.bz2 
+models_class1_unselected_with_mass_spec   NO                          http://github.com/openvax/mhcflurry/releases/download/pre-1.2.1/models_class1_unselected_with_mass_spec.20180227.tar.bz2 
+models_class1_minimal                     NO                          http://github.com/openvax/mhcflurry/releases/download/pre-1.2/models_class1_minimal.20180226.tar.bz2 
++ cd /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
++ export OMP_NUM_THREADS=1
++ OMP_NUM_THREADS=1
++ export PYTHONUNBUFFERED=1
++ PYTHONUNBUFFERED=1
++ '[' continue-incomplete == continue-incomplete ']'
++ '[' -f train_data.csv.bz2 ']'
++ echo 'Reusing existing training data'
++ rm -rf commands
+Reusing existing training data
++ mkdir commands
++ '[' continue-incomplete == continue-incomplete ']'
++ '[' -f models/weights.csv ']'
+++ pwd
+++ mhcflurry-downloads path models_class1_pan
+++ mhcflurry-downloads path models_class1_processing
+++ mhcflurry-downloads path models_class1_processing
+++ pwd
++ echo time mhcflurry-class1-train-presentation-models --data /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/train_data.csv.bz2 --affinity-predictor '"/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined"' --processing-predictor-with-flanks '"/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.with_flanks"' --processing-predictor-without-flanks '"/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.no_flank"' --out-models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models
++ '[' continue-incomplete == continue-incomplete ']'
++ '[' -f models/percent_ranks.csv ']'
+++ pwd
+++ mhcflurry-downloads path models_class1_pan
+++ mhcflurry-downloads path models_class1_pan
++ echo time mhcflurry-calibrate-percentile-ranks --models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models --match-amino-acid-distribution-data '"/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined/train_data.csv.bz2"' --alleles-file '"/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined/train_data.csv.bz2"' --predictor-kind class1_presentation --num-peptides-per-length 100000 --alleles-per-genotype 1 --num-genotypes 50 --verbosity 1
++ ls -lh commands
+total 512
+-rw-r--r-- 1 odonnt02 nkcancer 1.3K Jun 10 15:27 train.sh
+Running on cluster
++ '[' cluster '!=' cluster ']'
++ echo 'Running on cluster'
+++ ls commands/train.sh
++ for i in '$(ls commands/*.sh)'
+# *******
++ echo '# *******'
++ echo '# Command commands/train.sh'
+# Command commands/train.sh
++ cat /hpc/users/odonnt02/sinai/git/mhcflurry/downloads-generation/models_class1_presentation/cluster_submit_script_header.mssm_hpc.lsf
+++ pwd
++ echo cd /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
++ cat commands/train.sh
++ cat commands/train.sh.lsf
+#!/bin/bash
+#BSUB -J MHCf # Job name
+#BSUB -P acc_nkcancer # allocation account or Unix group
+#BSUB -q premium # queue
+#BSUB -R span[hosts=1] # one node
+#BSUB -n 1 # number of compute cores
+#BSUB -W 40:00 # walltime in HH:MM
+#BSUB -R rusage[mem=45000] # mb memory requested
+#BSUB -o %J.stdout # output log (%J : JobID)
+#BSUB -eo %J.stderr # error log
+#BSUB -L /bin/bash # Initialize the execution environment
+#
+
+set -e
+set -x
+
+echo "Subsequent stderr output redirected to stdout" >&2
+exec 2>&1
+
+export TMPDIR=/local/JOBS/mhcflurry
+export PATH=$HOME/.conda/envs/py36b/bin/:$PATH
+export PYTHONUNBUFFERED=1
+export KMP_SETTINGS=1
+
+free -m
+module list
+env
+
+cd /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+time mhcflurry-class1-train-presentation-models --data /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/train_data.csv.bz2 --affinity-predictor "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined" --processing-predictor-with-flanks "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.with_flanks" --processing-predictor-without-flanks "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.no_flank" --out-models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models
+time mhcflurry-calibrate-percentile-ranks --models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models --match-amino-acid-distribution-data "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined/train_data.csv.bz2" --alleles-file "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined/train_data.csv.bz2" --predictor-kind class1_presentation --num-peptides-per-length 100000 --alleles-per-genotype 1 --num-genotypes 50 --verbosity 1
++ wait
++ bsub -K
+Job <10755342> is submitted to queue <premium>.
+<<Waiting for dispatch ...>>
+<<Starting on lc01g06>>
+Job <10755342> is being terminated

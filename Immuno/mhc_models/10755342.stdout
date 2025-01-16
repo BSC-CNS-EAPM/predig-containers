@@ -1,0 +1,476 @@
+Sender: LSF System <lsfadmin@lc01g06>
+Subject: Job 10755342: <MHCf> in cluster <chimera> Exited
+
+Job <MHCf> was submitted from host <li03c04> by user <odonnt02> in cluster <chimera> at Wed Jun 10 15:27:27 2020
+Job was executed on host(s) <lc01g06>, in queue <premium>, as user <odonnt02> in cluster <chimera> at Wed Jun 10 15:27:28 2020
+</hpc/users/odonnt02> was used as the home directory.
+</hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation> was used as the working directory.
+Started at Wed Jun 10 15:27:28 2020
+Terminated at Wed Jun 10 15:51:43 2020
+Results reported at Wed Jun 10 15:51:43 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -J MHCf # Job name
+#BSUB -P acc_nkcancer # allocation account or Unix group
+#BSUB -q premium # queue
+#BSUB -R span[hosts=1] # one node
+#BSUB -n 1 # number of compute cores
+#BSUB -W 40:00 # walltime in HH:MM
+#BSUB -R rusage[mem=45000] # mb memory requested
+#BSUB -o %J.stdout # output log (%J : JobID)
+#BSUB -eo %J.stderr # error log
+#BSUB -L /bin/bash # Initialize the execution environment
+#
+
+set -e
+set -x
+
+echo "Subsequent stderr output redirected to stdout" >&2
+exec 2>&1
+
+export TMPDIR=/local/JOBS/mhcflurry
+export PATH=$HOME/.conda/envs/py36b/bin/:$PATH
+export PYTHONUNBUFFERED=1
+export KMP_SETTINGS=1
+
+free -m
+module list
+env
+
+cd /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+time mhcflurry-class1-train-presentation-models --data /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/train_data.csv.bz2 --affinity-predictor "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined" --processing-predictor-with-flanks "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.with_flanks" --processing-predictor-without-flanks "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.no_flank" --out-models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models
+time mhcflurry-calibrate-percentile-ranks --models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models --match-amino-acid-distribution-data "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined/train_data.csv.bz2" --alleles-file "/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined/train_data.csv.bz2" --predictor-kind class1_presentation --num-peptides-per-length 100000 --alleles-per-genotype 1 --num-genotypes 50 --verbosity 1
+
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   1444.54 sec.
+    Max Memory :                                 2219 MB
+    Average Memory :                             1442.75 MB
+    Total Requested Memory :                     45000.00 MB
+    Delta Memory :                               42781.00 MB
+    Max Swap :                                   17592186044415 MB
+    Max Processes :                              5
+    Max Threads :                                14
+    Run time :                                   1455 sec.
+    Turnaround time :                            1456 sec.
+
+The output (if any) follows:
+
++ export TMPDIR=/local/JOBS/mhcflurry
++ TMPDIR=/local/JOBS/mhcflurry
++ export PATH=/hpc/users/odonnt02/.conda/envs/py36b/bin/:/hpc/packages/minerva-common/anaconda2/4.3.0/bin:/hpc/packages/minerva-common/anaconda2/4.3.0/condabin:/hpc/users/odonnt02/miniconda2/bin:/hpc/packages/minerva-common/vim/8.0/bin:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/etc:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/bin:/bin:/usr/bin:/usr/mbin:/local/bin:/usr/local:/usr/ucb:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin:/opt/ibutils/bin:/hpc/users/odonnt02/scripts:/hpc/users/odonnt02/bin
++ PATH=/hpc/users/odonnt02/.conda/envs/py36b/bin/:/hpc/packages/minerva-common/anaconda2/4.3.0/bin:/hpc/packages/minerva-common/anaconda2/4.3.0/condabin:/hpc/users/odonnt02/miniconda2/bin:/hpc/packages/minerva-common/vim/8.0/bin:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/etc:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/bin:/bin:/usr/bin:/usr/mbin:/local/bin:/usr/local:/usr/ucb:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin:/opt/ibutils/bin:/hpc/users/odonnt02/scripts:/hpc/users/odonnt02/bin
++ export PYTHONUNBUFFERED=1
++ PYTHONUNBUFFERED=1
++ export KMP_SETTINGS=1
++ KMP_SETTINGS=1
++ free -m
+              total        used        free      shared  buff/cache   available
+Mem:         192924       27633      148752       13848       16539      150049
+Swap:             0           0           0
++ module list
+++ /usr/share/lmod/lmod/libexec/lmod bash list
+
+Currently Loaded Modules:
+  1) vim/8.0
+
+ 
+
++ eval 'MODULEPATH=/etc/modulefiles:/usr/share/modulefiles:/usr/share/lmod/lmod/modulefiles/Core:/opt/hpc/packages/minerva-centos7/modulefiles:/opt/hpc/packages/minerva-common/modulefiles;' export 'MODULEPATH;' '_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXt9LG1UPXt2aW09e1siZm4iXT0iL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMvdmltLzguMCIsWyJmdWxsTmFtZSJdPSJ2aW0vOC4wIixbImxvYWRPcmRlciJdPTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0idmltIix9LH0sbXBhdGhBPXsiL2V0Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL2xtb2QvbG1vZC9tb2R1bGVmaWxlcy9Db3JlIiwiL29wdC9ocGMvcGFja2Fn;' export '_ModuleTable001_;' '_ModuleTable002_=ZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzIiwiL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvbG1vZC9sbW9kL21vZHVsZWZpbGVzL0NvcmU6L29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzOi9vcHQvaHBjL3BhY2thZ2VzL21pbmVydmEtY29tbW9uL21vZHVsZWZpbGVzIix9;' export '_ModuleTable002_;' '_ModuleTable_Sz_=2;' export '_ModuleTable_Sz_;'
+++ MODULEPATH=/etc/modulefiles:/usr/share/modulefiles:/usr/share/lmod/lmod/modulefiles/Core:/opt/hpc/packages/minerva-centos7/modulefiles:/opt/hpc/packages/minerva-common/modulefiles
+++ export MODULEPATH
+++ _ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXt9LG1UPXt2aW09e1siZm4iXT0iL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMvdmltLzguMCIsWyJmdWxsTmFtZSJdPSJ2aW0vOC4wIixbImxvYWRPcmRlciJdPTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0idmltIix9LH0sbXBhdGhBPXsiL2V0Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL2xtb2QvbG1vZC9tb2R1bGVmaWxlcy9Db3JlIiwiL29wdC9ocGMvcGFja2Fn
+++ export _ModuleTable001_
+++ _ModuleTable002_=ZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzIiwiL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvbG1vZC9sbW9kL21vZHVsZWZpbGVzL0NvcmU6L29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzOi9vcHQvaHBjL3BhY2thZ2VzL21pbmVydmEtY29tbW9uL21vZHVsZWZpbGVzIix9
+++ export _ModuleTable002_
+++ _ModuleTable_Sz_=2
+++ export _ModuleTable_Sz_
+++ : -s sh
++ eval
++ env
+MANPATH=/hpc/packages/minerva-common/vim/8.0/share/man:/usr/share/lmod/lmod/share/man:/hpc/lsf/10.1/man::
+LESS_TERMCAP_mb=[01;31m
+LSB_EXEC_CLUSTER=chimera
+HOSTNAME=lc01g06
+LESS_TERMCAP_md=[01;31m
+LSB_EFFECTIVE_RSRCREQ=select[((healthy=1)) && (type == local)] order[!-slots:-maxslots] rusage[mem=45000.00] span[hosts=1] same[model] affinity[core(1)*1] 
+LESS_TERMCAP_me=[0m
+LSF_LOGDIR=/hpc/lsf/log
+LSF_LIM_API_NTRIES=1
+__LMOD_REF_COUNT_MODULEPATH=/etc/modulefiles:1;/usr/share/modulefiles:1;/usr/share/lmod/lmod/modulefiles/Core:1;/opt/hpc/packages/minerva-centos7/modulefiles:1;/opt/hpc/packages/minerva-common/modulefiles:1
+SHELL=/bin/bash
+LSB_BATCH_JID=10755342
+HISTSIZE=1000
+TMPDIR=/local/JOBS/mhcflurry
+MODULEPATH_ROOT=/usr/share/modulefiles
+RM_CPUTASK1=0
+CONDA_SHLVL=1
+LS_EXECCWD=/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+LSB_TRAPSIGS=trap # 15 10 12 2 1
+PYTHONUNBUFFERED=1
+CONDA_PROMPT_MODIFIER=(base) 
+LS_JOBPID=326455
+LSB_ERRORFILE=10755342.stderr
+LMOD_PKG=/usr/share/lmod/lmod
+LSB_MAX_NUM_PROCESSORS=1
+LSB_JOBRES_CALLBACK=43998@lc01g06
+LSF_SERVERDIR=/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/etc
+LSB_JOB_EXECUSER=odonnt02
+LSB_JOBID=10755342
+LESS_TERMCAP_ue=[0m
+LMOD_VERSION=7.8.17
+LSB_JOBRES_PID=326455
+LSB_JOBNAME=MHCf
+__LMOD_REF_COUNT_LOADEDMODULES=vim/8.0:1
+BSUB_BLOCK_EXEC_HOST=Y
+LSF_LIBDIR=/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/lib
+USER=odonnt02
+LMOD_sys=Linux
+LD_LIBRARY_PATH=/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/lib
+SBD_KRB5CCNAME_VAL=
+CONDA_EXE=/hpc/packages/minerva-common/anaconda2/4.3.0/bin/conda
+LSB_EEXEC_REAL_UID=
+HOSTTYPE=X86_64
+__LMOD_REF_COUNT__LMFILES_=/opt/hpc/packages/minerva-common/modulefiles/vim/8.0:1
+LSB_CG_MEMLIMIT=0xafc800000
+LS_EXEC_T=START
+PAGER=less
+LSB_SUB_RES_REQ= rusage[mem=45000] span[hosts=1]
+LS_SUBCWD=/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+LESS_TERMCAP_us=[01;32m
+LSB_HOSTS=lc01g06
+LSB_JOBFILENAME=/local/JOBS/1591817247.10755342
+_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXt9LG1UPXt2aW09e1siZm4iXT0iL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMvdmltLzguMCIsWyJmdWxsTmFtZSJdPSJ2aW0vOC4wIixbImxvYWRPcmRlciJdPTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0idmltIix9LH0sbXBhdGhBPXsiL2V0Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL2xtb2QvbG1vZC9tb2R1bGVmaWxlcy9Db3JlIiwiL29wdC9ocGMvcGFja2Fn
+MAIL=/var/spool/mail/odonnt02
+PATH=/hpc/users/odonnt02/.conda/envs/py36b/bin/:/hpc/packages/minerva-common/anaconda2/4.3.0/bin:/hpc/packages/minerva-common/anaconda2/4.3.0/condabin:/hpc/users/odonnt02/miniconda2/bin:/hpc/packages/minerva-common/vim/8.0/bin:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/etc:/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/bin:/bin:/usr/bin:/usr/mbin:/local/bin:/usr/local:/usr/ucb:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin:/opt/ibutils/bin:/hpc/users/odonnt02/scripts:/hpc/users/odonnt02/bin
+LSB_JOBINDEX=0
+CUDA_VISIBLE_DEVICES_ORIG=
+LSB_EXIT_PRE_ABORT=99
+CONDA_PREFIX=/hpc/packages/minerva-common/anaconda2/4.3.0
+LSB_JOBEXIT_STAT=0
+PWD=/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+_LMFILES_=/opt/hpc/packages/minerva-common/modulefiles/vim/8.0
+CUDA_VISIBLE_DEVICES=
+LSB_RES_GET_FANOUT_INFO=Y
+MODULEPATH=/etc/modulefiles:/usr/share/modulefiles:/usr/share/lmod/lmod/modulefiles/Core:/opt/hpc/packages/minerva-centos7/modulefiles:/opt/hpc/packages/minerva-common/modulefiles
+LSB_CHKFILENAME=/local/JOBS/1591817247.10755342
+_ModuleTable_Sz_=2
+LOADEDMODULES=vim/8.0
+LSB_DJOB_HOSTFILE=/local/JOBS/1591817247.10755342.hostfile
+LSF_JOB_TIMESTAMP_VALUE=1591817248
+LMOD_CMD=/usr/share/lmod/lmod/libexec/lmod
+LSB_AFFINITY_HOSTFILE=/local/JOBS/1591817247.10755342.hostAffinityFile
+LSB_DJOB_NUMPROC=1
+LSF_BINDIR=/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/bin
+LSB_EXEC_HOSTTYPE=X86_64
+HISTCONTROL=ignoredups
+LESSCHARSET=latin1
+SHLVL=2
+HOME=/hpc/users/odonnt02
+__LMOD_REF_COUNT_PATH=/hpc/packages/minerva-common/vim/8.0/bin:1;/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/etc:1;/hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/bin:1;/bin:1;/usr/bin:1;/usr/mbin:1;/local/bin:1;/usr/local:1;/usr/ucb:1;/usr/local/sbin:1;/usr/sbin:1;/usr/lpp/mmfs/bin:1;/opt/ibutils/bin:1;/hpc/users/odonnt02/scripts:1
+LSB_APPLICATION_NAME=default
+JOB_TERMINATE_INTERVAL=10
+_ModuleTable002_=ZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzIiwiL29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jb21tb24vbW9kdWxlZmlsZXMiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvbG1vZC9sbW9kL21vZHVsZWZpbGVzL0NvcmU6L29wdC9ocGMvcGFja2FnZXMvbWluZXJ2YS1jZW50b3M3L21vZHVsZWZpbGVzOi9vcHQvaHBjL3BhY2thZ2VzL21pbmVydmEtY29tbW9uL21vZHVsZWZpbGVzIix9
+BINARY_TYPE_HPC=
+LSB_ACCT_FILE=/local/tmp/10755342.tmpdir/.1591817247.10755342.acct
+LSB_SUB_HOST=li03c04
+BASH_ENV=/usr/share/lmod/lmod/init/bash
+__LSF_JOB_TMPDIR__=/local/tmp/10755342.tmpdir
+LSB_SUB_USER=odonnt02
+LSFUSER=odonnt02
+CONDA_PYTHON_EXE=/hpc/packages/minerva-common/anaconda2/4.3.0/bin/python
+LESS=-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f \
+:stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...
+LSB_OUTDIR=/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
+LSB_QUEUE=premium
+LSB_MCPU_HOSTS=lc01g06 1 
+LSB_OUTPUTFILE=10755342.stdout
+LOGNAME=odonnt02
+LESS_TERMCAP_so=[01;44;33m
+MODULESHOME=/usr/share/lmod/lmod
+CONDA_DEFAULT_ENV=base
+LMOD_SETTARG_FULL_SUPPORT=no
+LESSOPEN=|/usr/bin/lesspipe.sh %s 2>&-
+LSF_CGROUP_TOPDIR_KEY=chimera
+OMP_NUM_THREADS=1
+LSB_XFER_OP=
+LSB_EEXEC_REAL_GID=
+LSB_BIND_CPU_LIST=0
+KMP_SETTINGS=1
+__LMOD_REF_COUNT_MANPATH=/hpc/packages/minerva-common/vim/8.0/share/man:1;/usr/share/lmod/lmod/share/man:1;/hpc/lsf/10.1/man:1
+LMOD_DIR=/usr/share/lmod/lmod/libexec
+LSF_ENVDIR=/hpc/lsf/conf
+LSB_DJOB_RANKFILE=/local/JOBS/1591817247.10755342.hostfile
+LESS_TERMCAP_se=[0m
+BASH_FUNC_module()=() {  eval $($LMOD_CMD bash "$@") && eval $(${LMOD_SETTARG_CMD:-:} -s sh)
+}
+BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd "$@")
+}
+_=/bin/env
++ cd /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation
++ mhcflurry-class1-train-presentation-models --data /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/train_data.csv.bz2 --affinity-predictor /hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined --processing-predictor-with-flanks /hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.with_flanks --processing-predictor-without-flanks /hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.no_flank --out-models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models
+To show stack trace, run:
+kill -s USR1 326809
+Arguments:
+Namespace(affinity_predictor='/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined', data='/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/train_data.csv.bz2', debug=False, hla_column='hla', out_models_dir='/hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models', processing_predictor_with_flanks='/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.with_flanks', processing_predictor_without_flanks='/hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_processing//models.selected.no_flank', target_column='hit', verbosity=1)
+Loaded training data: (75378, 7)
+Subselected to 8-15mers: (75378, 7)
+Loaded affinity predictor <Class1AffinityPredictor at 0x2ae10dcd45f8 [mhcflurry 1.7.0] [pan] generated on Wed Jun 10 06:40:35 2020>
+Loaded processing_predictor_with_flanks <Class1ProcessingPredictor at 0x2ae117ebfe48 [mhcflurry 1.7.0] generated on Wed Jun 10 14:45:15 2020>
+Loaded processing_predictor_without_flanks <Class1ProcessingPredictor at 0x2ae117eb2b38 [mhcflurry 1.7.0] generated on Wed Jun 10 14:54:49 2020>
+Before fit: saving affinity and processing predictors.
+Done writing:  /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models
+Optimizing affinity predictor.
+Using TensorFlow backend.
+WARNING: Logging before flag parsing goes to stderr.
+W0610 15:27:55.336795 47146059660928 deprecation.py:506] From /hpc/users/odonnt02/.conda/envs/py36b/lib/python3.6/site-packages/tensorflow_core/python/ops/resource_variable_ops.py:1630: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+W0610 15:27:55.415273 47146059660928 backend.py:548] OMP_NUM_THREADS is no longer used by the default Keras config. To configure the number of threads, use tf.config.threading APIs.
+2020-06-10 15:27:55.416231: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/lib
+2020-06-10 15:27:55.416261: E tensorflow/stream_executor/cuda/cuda_driver.cc:318] failed call to cuInit: UNKNOWN ERROR (303)
+2020-06-10 15:27:55.416285: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (lc01g06): /proc/driver/nvidia/version does not exist
+2020-06-10 15:27:55.416532: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2020-06-10 15:27:55.423240: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2700000000 Hz
+2020-06-10 15:27:55.423354: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55aa65c696b0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-06-10 15:27:55.423367: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+Optimization performed:  True
+Fitting.
+Predicting affinities.
+  0%|          | 0/50 [00:00<?, ?it/s]W0610 15:28:05.374949 47146059660928 module_wrapper.py:139] From /hpc/users/odonnt02/.conda/envs/py36b/lib/python3.6/site-packages/keras/backend/tensorflow_backend.py:422: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.
+
+  2%|2         | 1/50 [00:12<10:11, 12.49s/it]  4%|4         | 2/50 [00:15<07:42,  9.64s/it]  6%|6         | 3/50 [00:17<05:41,  7.26s/it]  8%|8         | 4/50 [00:19<04:23,  5.73s/it] 10%|#         | 5/50 [00:23<03:52,  5.18s/it] 12%|#2        | 6/50 [00:26<03:18,  4.50s/it] 14%|#4        | 7/50 [00:32<03:31,  4.92s/it] 16%|#6        | 8/50 [00:39<04:03,  5.80s/it] 18%|#8        | 9/50 [00:44<03:48,  5.59s/it] 20%|##        | 10/50 [00:51<03:56,  5.92s/it] 22%|##2       | 11/50 [00:52<02:50,  4.38s/it] 24%|##4       | 12/50 [00:53<02:11,  3.45s/it] 26%|##6       | 13/50 [00:56<01:55,  3.11s/it] 28%|##8       | 14/50 [00:57<01:37,  2.71s/it] 30%|###       | 15/50 [01:00<01:39,  2.84s/it] 32%|###2      | 16/50 [01:02<01:25,  2.52s/it] 34%|###4      | 17/50 [01:06<01:31,  2.76s/it] 36%|###6      | 18/50 [01:07<01:11,  2.24s/it] 38%|###8      | 19/50 [01:08<01:01,  1.99s/it] 40%|####      | 20/50 [01:10<00:55,  1.85s/it] 42%|####2     | 21/50 [01:11<00:48,  1.66s/it] 44%|####4     | 22/50 [01:14<00:58,  2.09s/it] 46%|####6     | 23/50 [01:16<01:00,  2.23s/it] 48%|####8     | 24/50 [01:20<01:08,  2.62s/it] 50%|#####     | 25/50 [01:21<00:55,  2.21s/it] 52%|#####2    | 26/50 [01:24<00:53,  2.25s/it] 54%|#####4    | 27/50 [01:26<00:52,  2.29s/it] 56%|#####6    | 28/50 [01:31<01:11,  3.26s/it] 58%|#####8    | 29/50 [01:33<00:59,  2.81s/it] 60%|######    | 30/50 [01:34<00:41,  2.07s/it] 62%|######2   | 31/50 [01:38<00:51,  2.74s/it] 64%|######4   | 32/50 [01:43<01:02,  3.46s/it] 66%|######6   | 33/50 [01:47<01:00,  3.58s/it] 68%|######8   | 34/50 [01:49<00:48,  3.06s/it] 70%|#######   | 35/50 [01:56<01:06,  4.40s/it] 72%|#######2  | 36/50 [02:00<00:56,  4.07s/it] 74%|#######4  | 37/50 [02:01<00:43,  3.35s/it] 76%|#######6  | 38/50 [02:05<00:40,  3.41s/it] 78%|#######8  | 39/50 [02:05<00:28,  2.59s/it] 80%|########  | 40/50 [02:09<00:28,  2.82s/it] 82%|########2 | 41/50 [02:13<00:28,  3.20s/it] 84%|########4 | 42/50 [02:14<00:19,  2.46s/it] 86%|########6 | 43/50 [02:28<00:41,  5.91s/it] 88%|########8 | 44/50 [02:32<00:33,  5.56s/it] 90%|######### | 45/50 [02:33<00:20,  4.11s/it] 92%|#########2| 46/50 [02:34<00:12,  3.05s/it] 94%|#########3| 47/50 [02:37<00:09,  3.18s/it] 96%|#########6| 48/50 [02:42<00:07,  3.73s/it] 98%|#########8| 49/50 [02:45<00:03,  3.53s/it]100%|##########| 50/50 [02:47<00:00,  3.05s/it]
+Training variant without_flanks
+Predicting processing.
+  0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [00:39<00:00, 39.12s/it]
+Fitting LR model.
+           peptide  peptide_num  ... target  processing_score
+0       ITTQATKAGF            0  ...      0          0.029817
+1         KGHLDAEL            1  ...      0          0.095670
+2      LPPETQPLHEV            2  ...      0          0.105195
+3        SLLEKSLGL            3  ...      1          0.776112
+4       FYKVIESFIK            4  ...      0          0.122771
+5      DDSKEGAGEQK            5  ...      0          0.000893
+6       SSAGSAELTI            6  ...      0          0.012599
+7       GVTHICPVYE            7  ...      0          0.089903
+8        LLLNYAVRL            8  ...      1          0.310768
+9      IKKKKKSKKSK            9  ...      0          0.001169
+10      VGTTLGTVLV           10  ...      1          0.009560
+11        ERDAALKQ           11  ...      0          0.001359
+12      KPQPHSGSVL           12  ...      1          0.652141
+13     ALRDNLGEVPL           13  ...      0          0.313508
+14        LIVRKDRH           14  ...      0          0.004529
+15       KYPLLLQSI           15  ...      1          0.445286
+16       SPKPPSQQL           16  ...      1          0.974909
+17       ERYWPAGQE           17  ...      0          0.123246
+18      STLCVLEEEP           18  ...      0          0.006045
+19      QKQSFSFSKS           19  ...      0          0.077954
+20     LAARNPAKVWT           20  ...      0          0.007429
+21      HIVELQIILE           21  ...      0          0.060354
+22        WNQQVTQM           22  ...      0          0.016314
+23        CVALSAYD           23  ...      0          0.000269
+24      TVETEREESK           24  ...      0          0.002074
+25        SGFSSSQS           25  ...      0          0.001254
+26        PSSKSNKP           26  ...      0          0.000702
+27       HLAPPQPAK           27  ...      1          0.778230
+28     VSDPSSPQYGK           28  ...      1          0.787802
+29       GRLVTRAAF           29  ...      1          0.687918
+...            ...          ...  ...    ...               ...
+75348    APRVPVQAL        75348  ...      1          0.959458
+75349    TTLGLSSYQ        75349  ...      0          0.011780
+75350   GMANLLTGPK        75350  ...      1          0.249500
+75351     VPSLDTKS        75351  ...      0          0.015231
+75352  ATTPSAVFRVW        75352  ...      1          0.800811
+75353  RYIPPHLRNRE        75353  ...      0          0.156368
+75354  RQYLSQAVVEV        75354  ...      0          0.707357
+75355    QYNDVVNAL        75355  ...      1          0.568448
+75356     GNYGNYGY        75356  ...      0          0.058545
+75357    VQKEDIEVY        75357  ...      1          0.783201
+75358    YQYPRPLLI        75358  ...      1          0.980595
+75359     EEEEEDSD        75359  ...      0          0.000131
+75360  GAGAGLPALDL        75360  ...      0          0.003896
+75361    GLVDQLVKA        75361  ...      1          0.679320
+75362    AEAKFFTES        75362  ...      1          0.945230
+75363    EEIDRTPWG        75363  ...      0          0.061566
+75364    FSDQGGRKY        75364  ...      1          0.740418
+75365    SHADVVNLL        75365  ...      1          0.970587
+75366   REKDDANFKL        75366  ...      1          0.485443
+75367     QLIVQFLE        75367  ...      0          0.034172
+75368  KVDDRDYYGNK        75368  ...      1          0.205716
+75369    SLIQDQARE        75369  ...      0          0.012982
+75370  GQPSAPGDTSV        75370  ...      0          0.016373
+75371    IKVMHKQLL        75371  ...      0          0.052097
+75372   KEGEEEQAIN        75372  ...      0          0.002233
+75373    GRLYLRPEL        75373  ...      1          0.715790
+75374   SASDTQVAQE        75374  ...      0          0.000959
+75375     ESQLEATK        75375  ...      0          0.005795
+75376   LTRGLKDESL        75376  ...      0          0.175289
+75377    ELKERKSSL        75377  ...      1          0.210750
+
+[75378 rows x 9 columns]
+Training variant with_flanks
+Predicting processing.
+  0%|          | 0/1 [00:00<?, ?it/s]100%|##########| 1/1 [02:36<00:00, 156.79s/it]
+Fitting LR model.
+           peptide  peptide_num  ... target  processing_score
+0       ITTQATKAGF            0  ...      0          0.276890
+1         KGHLDAEL            1  ...      0          0.020187
+2      LPPETQPLHEV            2  ...      0          0.381062
+3        SLLEKSLGL            3  ...      1          0.932718
+4       FYKVIESFIK            4  ...      0          0.109418
+5      DDSKEGAGEQK            5  ...      0          0.001139
+6       SSAGSAELTI            6  ...      0          0.029002
+7       GVTHICPVYE            7  ...      0          0.325016
+8        LLLNYAVRL            8  ...      1          0.436236
+9      IKKKKKSKKSK            9  ...      0          0.003950
+10      VGTTLGTVLV           10  ...      1          0.008231
+11        ERDAALKQ           11  ...      0          0.010295
+12      KPQPHSGSVL           12  ...      1          0.816571
+13     ALRDNLGEVPL           13  ...      0          0.054876
+14        LIVRKDRH           14  ...      0          0.008339
+15       KYPLLLQSI           15  ...      1          0.643476
+16       SPKPPSQQL           16  ...      1          0.932585
+17       ERYWPAGQE           17  ...      0          0.220963
+18      STLCVLEEEP           18  ...      0          0.000931
+19      QKQSFSFSKS           19  ...      0          0.084373
+20     LAARNPAKVWT           20  ...      0          0.003555
+21      HIVELQIILE           21  ...      0          0.621306
+22        WNQQVTQM           22  ...      0          0.057231
+23        CVALSAYD           23  ...      0          0.000433
+24      TVETEREESK           24  ...      0          0.002920
+25        SGFSSSQS           25  ...      0          0.004054
+26        PSSKSNKP           26  ...      0          0.000693
+27       HLAPPQPAK           27  ...      1          0.444926
+28     VSDPSSPQYGK           28  ...      1          0.838375
+29       GRLVTRAAF           29  ...      1          0.782320
+...            ...          ...  ...    ...               ...
+75348    APRVPVQAL        75348  ...      1          0.943388
+75349    TTLGLSSYQ        75349  ...      0          0.131701
+75350   GMANLLTGPK        75350  ...      1          0.697510
+75351     VPSLDTKS        75351  ...      0          0.021820
+75352  ATTPSAVFRVW        75352  ...      1          0.785913
+75353  RYIPPHLRNRE        75353  ...      0          0.163293
+75354  RQYLSQAVVEV        75354  ...      0          0.454426
+75355    QYNDVVNAL        75355  ...      1          0.739344
+75356     GNYGNYGY        75356  ...      0          0.167338
+75357    VQKEDIEVY        75357  ...      1          0.689119
+75358    YQYPRPLLI        75358  ...      1          0.971343
+75359     EEEEEDSD        75359  ...      0          0.000630
+75360  GAGAGLPALDL        75360  ...      0          0.028818
+75361    GLVDQLVKA        75361  ...      1          0.255143
+75362    AEAKFFTES        75362  ...      1          0.948548
+75363    EEIDRTPWG        75363  ...      0          0.020338
+75364    FSDQGGRKY        75364  ...      1          0.579418
+75365    SHADVVNLL        75365  ...      1          0.974143
+75366   REKDDANFKL        75366  ...      1          0.574512
+75367     QLIVQFLE        75367  ...      0          0.055787
+75368  KVDDRDYYGNK        75368  ...      1          0.297962
+75369    SLIQDQARE        75369  ...      0          0.036275
+75370  GQPSAPGDTSV        75370  ...      0          0.081340
+75371    IKVMHKQLL        75371  ...      0          0.038003
+75372   KEGEEEQAIN        75372  ...      0          0.004227
+75373    GRLYLRPEL        75373  ...      1          0.637553
+75374   SASDTQVAQE        75374  ...      0          0.134001
+75375     ESQLEATK        75375  ...      0          0.323475
+75376   LTRGLKDESL        75376  ...      0          0.114522
+75377    ELKERKSSL        75377  ...      1          0.447281
+
+[75378 rows x 9 columns]
+Done fitting in 363.94794034957886 seconds
+Saving weights and metadata.
+Wrote /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models
+
+real	6m32.662s
+user	5m51.758s
+sys	0m34.174s
++ mhcflurry-calibrate-percentile-ranks --models-dir /hpc/users/odonnt02/mhcflurry-scratch/20200609/mhcflurry-downloads-generation/models_class1_presentation/models --match-amino-acid-distribution-data /hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined/train_data.csv.bz2 --alleles-file /hpc/users/odonnt02/.local/share/mhcflurry/4/1.7.0/models_class1_pan//models.combined/train_data.csv.bz2 --predictor-kind class1_presentation --num-peptides-per-length 100000 --alleles-per-genotype 1 --num-genotypes 50 --verbosity 1
+To show stack trace, run:
+kill -s USR1 335529
+Using amino acid distribution:
+A    0.073504
+E    0.061951
+N    0.033271
+D    0.039539
+T    0.055338
+L    0.117079
+V    0.072182
+S    0.071388
+Q    0.040527
+F    0.049952
+G    0.051507
+C    0.006393
+H    0.026495
+I    0.055427
+W    0.013130
+K    0.057743
+M    0.020615
+Y    0.042078
+R    0.057914
+P    0.053960
+X    0.000008
+dtype: float64
+Done generating peptides in 1.37 sec.
+Using TensorFlow backend.
+WARNING: Logging before flag parsing goes to stderr.
+W0610 15:34:16.787087 47865213058688 deprecation.py:506] From /hpc/users/odonnt02/.conda/envs/py36b/lib/python3.6/site-packages/tensorflow_core/python/ops/resource_variable_ops.py:1630: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+W0610 15:34:16.864860 47865213058688 backend.py:548] OMP_NUM_THREADS is no longer used by the default Keras config. To configure the number of threads, use tf.config.threading APIs.
+2020-06-10 15:34:16.865196: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /hpc/lsf/10.1/linux3.10-glibc2.17-x86_64/lib
+2020-06-10 15:34:16.865226: E tensorflow/stream_executor/cuda/cuda_driver.cc:318] failed call to cuInit: UNKNOWN ERROR (303)
+2020-06-10 15:34:16.865250: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (lc01g06): /proc/driver/nvidia/version does not exist
+2020-06-10 15:34:16.865467: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2020-06-10 15:34:16.870771: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2700000000 Hz
+2020-06-10 15:34:16.870860: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x5623eed01c50 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-06-10 15:34:16.870870: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+Num alleles 247
+Sampled genotypes:  ['HLA-A*02:01', 'HLA-C*01:02', 'HLA-B*40:02', 'HLA-B*27:08', 'HLA-B*15:09', 'HLA-B*13:02', 'HLA-C*04:01', 'HLA-B*58:01', 'HLA-B*07:04', 'HLA-A*02:03', 'Mamu-B*52:01', 'HLA-B*48:01', 'HLA-B*44:28', 'Mamu-A*02:01', 'HLA-B*56:01', 'Mamu-B*01:01', 'HLA-B*41:04', 'HLA-C*12:02', 'Eqca-16*01:01', 'HLA-B*27:20', 'Patr-B*24:01', 'HLA-A*80:01', 'HLA-B*15:10', 'HLA-G*01:03', 'Patr-B*09:01', 'HLA-C*14:02', 'HLA-B*07:02', 'HLA-A*66:02', 'HLA-C*03:01', 'HLA-B*38:02', 'Patr-A*06:02', 'HLA-B*35:08', 'HLA-C*02:02', 'HLA-C*12:03', 'Mamu-B*17:04', 'HLA-B*42:01', 'HLA-A*68:01', 'HLA-B*41:02', 'H-2-Ld', 'HLA-A*66:01', 'Patr-A*04:01', 'HLA-A*33:01', 'HLA-A*29:02', 'HLA-A*01:01', 'H-2-Dd', 'HLA-A*02:04']
+Num peptides:  800000
+Generating predictions
+Predicting processing.
+  0%|          | 0/8 [00:00<?, ?it/s]W0610 15:34:22.994632 47865213058688 module_wrapper.py:139] From /hpc/users/odonnt02/.conda/envs/py36b/lib/python3.6/site-packages/keras/backend/tensorflow_backend.py:422: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.
+
+ 12%|#2        | 1/8 [00:49<05:49, 49.87s/it] 25%|##5       | 2/8 [01:35<04:51, 48.51s/it] 38%|###7      | 3/8 [02:20<03:57, 47.56s/it] 50%|#####     | 4/8 [03:06<03:07, 46.94s/it] 62%|######2   | 5/8 [03:51<02:19, 46.46s/it] 75%|#######5  | 6/8 [04:36<01:32, 46.14s/it] 88%|########7 | 7/8 [05:22<00:45, 45.91s/it]100%|##########| 8/8 [06:07<00:00, 45.74s/it]
+Predicting affinities.
+  0%|          | 0/46 [00:00<?, ?it/s]  2%|2         | 1/46 [05:55<4:26:47, 355.71s/it]Traceback (most recent call last):
+  File "/hpc/users/odonnt02/.conda/envs/py36b/bin/mhcflurry-calibrate-percentile-ranks", line 11, in <module>
+    load_entry_point('mhcflurry', 'console_scripts', 'mhcflurry-calibrate-percentile-ranks')()
+  File "/hpc/users/odonnt02/sinai/git/mhcflurry/mhcflurry/calibrate_percentile_ranks_command.py", line 163, in run
+    return run_class1_presentation_predictor(args, peptides)
+  File "/hpc/users/odonnt02/sinai/git/mhcflurry/mhcflurry/calibrate_percentile_ranks_command.py", line 208, in run_class1_presentation_predictor
+    alleles=genotypes)
+  File "/hpc/users/odonnt02/sinai/git/mhcflurry/mhcflurry/class1_presentation_predictor.py", line 526, in predict
+    throw=throw)
+  File "/hpc/users/odonnt02/sinai/git/mhcflurry/mhcflurry/class1_presentation_predictor.py", line 187, in predict_affinity
+    throw=throw)
+  File "/hpc/users/odonnt02/sinai/git/mhcflurry/mhcflurry/class1_affinity_predictor.py", line 1034, in predict
+    model_kwargs=model_kwargs
+  File "/hpc/users/odonnt02/sinai/git/mhcflurry/mhcflurry/class1_affinity_predictor.py", line 1221, in predict_to_dataframe
+    **model_kwargs)
+  File "/hpc/users/odonnt02/sinai/git/mhcflurry/mhcflurry/class1_neural_network.py", line 1073, in predict
+    raw_predictions = network.predict(x_dict, batch_size=batch_size)
+  File "/hpc/users/odonnt02/.conda/envs/py36b/lib/python3.6/site-packages/keras/engine/training.py", line 1462, in predict
+    callbacks=callbacks)
+  File "/hpc/users/odonnt02/.conda/envs/py36b/lib/python3.6/site-packages/keras/engine/training_arrays.py", line 324, in predict_loop
+    batch_outs = f(ins_batch)
+  File "/hpc/users/odonnt02/.conda/envs/py36b/lib/python3.6/site-packages/tensorflow_core/python/keras/backend.py", line 3476, in __call__
+    run_metadata=self.run_metadata)
+  File "/hpc/users/odonnt02/.conda/envs/py36b/lib/python3.6/site-packages/tensorflow_core/python/client/session.py", line 1472, in __call__
+    run_metadata_ptr)
+KeyboardInterrupt
+
+
+
+PS:
+
+Read file <10755342.stderr> for stderr output of this job.
+

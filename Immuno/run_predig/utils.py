@@ -88,6 +88,8 @@ def runPredigMHCflurry(df_csv: pd.DataFrame, predigMHCflurry_path: str):
                 "--no-throw",
                 "--always-include-best-allele",
                 "--no-flanking",
+                "--models",
+                "/Immuno/mhc_models/models"
             ],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,

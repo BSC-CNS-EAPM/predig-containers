@@ -16,7 +16,7 @@ RUN micromamba create -n predig_env -f /tmp/predig_env.yml -y
 RUN echo "source /opt/conda/envs/predig_env/bin/activate" >> /etc/bash.bashrc
 
 # Download mhcflurry models
-RUN micromamba run -n predig_env mhcflurry-downloads fetch models_class1_presentation
+# RUN micromamba run -n predig_env mhcflurry-downloads fetch models_class1_presentation
 
 # Copy the immuno container
 COPY Immuno /Immuno
