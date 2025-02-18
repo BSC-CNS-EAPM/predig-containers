@@ -198,4 +198,4 @@ HLA-B*07:02
 - All input/output files must be in the directory mounted to `/predig`
 - The UniProt database file must be in the directory mounted to `/uniprot`
 - File paths in commands should be relative to the mounted directories
-- Output files will be created in your mounted working directory
+- Output files will be created in your mounted working directory 
