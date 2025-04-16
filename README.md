@@ -122,7 +122,7 @@ singularity pull predig.sif docker://bsceapm/predig:latest
 The command structure is similar to Docker, but uses Singularity bind syntax:
 
 ```bash
-singularity run --bind /path/to/work/dir:/predig,/path/to/uniprot/dir:/uniprot /path/to/predig.sif <input_file> --output <output_file> [options]
+singularity run --bind /path/to/uniprot/dir:/uniprot /path/to/predig.sif <input_file> --output <output_file> [options]
 ```
 
 ### Singularity Examples
@@ -130,19 +130,19 @@ singularity run --bind /path/to/work/dir:/predig,/path/to/uniprot/dir:/uniprot /
 1. UniProt Mode:
 
 ```bash
-singularity run --bind ./:/predig,./my_uniprot_folder:/uniprot /path/to/predig.sif input_uniprot.csv --output results.csv
+singularity run --bind /my_uniprot_folder:/uniprot /path/to/predig.sif input_uniprot.csv --output results.csv
 ```
 
 2. Recombinant Mode:
 
 ```bash
-singularity run --bind ./:/predig,./my_uniprot_folder:/uniprot /path/to/predig.sif input_sequences.csv --output results.csv --type recombinant
+singularity run --bind /my_uniprot_folder:/uniprot /path/to/predig.sif input_sequences.csv --output results.csv --type recombinant
 ```
 
 3. FASTA Mode:
 
 ```bash
-singularity run --bind ./:/predig,./my_uniprot_folder:/uniprot /path/to/predig.sif sequences.fasta --output results.csv --type fasta --alleles alleles.csv
+singularity run --bind /my_uniprot_folder:/uniprot /path/to/predig.sif sequences.fasta --output results.csv --type fasta --alleles alleles.csv
 ```
 
 ### Singularity Notes
